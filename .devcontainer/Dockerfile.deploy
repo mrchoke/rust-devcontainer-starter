@@ -1,0 +1,4 @@
+FROM mrchoke/nectec-ace-api-master
+LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
+
+ADD ./ /app

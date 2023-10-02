@@ -1,0 +1,66 @@
+{
+  "name": "Rust Dev Container",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "service": "api",
+  "workspaceFolder": "/workspace/api",
+  "containerUser": "rust",
+  "init": true,
+  "updateRemoteUserUID": true,
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.autoClosingBrackets": "always",
+        "editor.bracketPairColorization.enabled": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
+        "editor.guides.bracketPairs": true,
+        "editor.guides.highlightActiveIndentation": false,
+        "editor.guides.indentation": false,
+        "editor.inlineSuggest.enabled": true,
+        "editor.minimap.enabled": false,
+        "editor.tabSize": 2,
+        "indentRainbow.indicatorStyle": "light",
+        "remote.autoForwardPorts": true,
+        "remote.localPortHost": "allInterfaces",
+        "terminal.integrated.cursorBlinking": true,
+        "terminal.integrated.defaultProfile.linux": "fish",
+        "workbench.colorCustomizations": {
+          "editorUnnecessaryCode.border": "#fbbd52",
+          "editorUnnecessaryCode.opacity": "#ffffff8b",
+          "editorIndentGuide.background1": "#2a2a2a"
+        },
+        "editor.showUnused": true,
+        "editor.renderLineHighlight": "gutter",
+        "terminal.integrated.gpuAcceleration": "on",
+        "terminal.integrated.copyOnSelection": true,
+        "terminal.integrated.cursorStyle": "line",
+        "terminal.integrated.fontSize": 15,
+        "editor.inlayHints.enabled": "on",
+        "editor.quickSuggestions": {
+          "other": "on",
+          "comments": "on",
+          "strings": "on"
+        },
+        "indentRainbow.lightIndicatorStyleLineWidth": 2
+      },
+      "extensions": [
+        "vadimcn.vscode-lldb",
+        "swellaby.vscode-rust-test-adapter",
+        "panicbit.cargo",
+        "JScearcy.rust-doc-viewer",
+        "tamasfe.even-better-toml",
+        "1YiB.rust-bundle",
+        "oderwat.indent-rainbow",
+        "streetsidesoftware.code-spell-checker",
+        "VisualStudioExptTeam.vscodeintellicode"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {}
+  }
+}
