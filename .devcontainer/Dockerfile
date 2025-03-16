@@ -1,31 +1,28 @@
-FROM rust:1
+FROM rust:1-bookworm AS builder
 
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y musl-tools
+
+RUN rustup target add x86_64-unknown-linux-musl
+
+COPY ./Cargo.toml ./Cargo.lock ./
+
+COPY . .
+
+RUN cargo add openssl --features vendored
+
+RUN cargo build --release --target x86_64-unknown-linux-musl
+
+FROM scratch
 LABEL maintainer="Supphachoke Suntiwichaya <mrchoke@gmail.com>"
 
-ENV TZ=Asia/Bangkok
-
-RUN apt update \
-  && apt install -y \
-  locales \
-  && apt clean
-
-ENV MULTIDICT_NO_EXTENSIONS=1
-
-RUN sed --in-place '/en_US.UTF-8/s/^#//' /etc/locale.gen  \
-  &&  sed --in-place '/th_TH.UTF-8/s/^#//' /etc/locale.gen \
-  && locale-gen
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+WORKDIR /app
 
 
-COPY ./app /app
+COPY --from=builder /usr/src/app/target/x86_64-unknown-linux-musl/release/hello .
 
-WORKDIR /app/
+EXPOSE 4000
 
+CMD ["./hello"]
 
-EXPOSE 8000
-CMD ["/start.sh"]
