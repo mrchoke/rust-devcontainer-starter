@@ -1,1 +1,0 @@
-bind \cr 'fish_search (commandline -b)'
