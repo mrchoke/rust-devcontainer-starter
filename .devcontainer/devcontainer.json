@@ -27,7 +27,7 @@
         "remote.autoForwardPorts": true,
         "remote.localPortHost": "allInterfaces",
         "terminal.integrated.cursorBlinking": true,
-        "terminal.integrated.defaultProfile.linux": "fish",
+        "terminal.integrated.defaultProfile.linux": "zsh",
         "workbench.colorCustomizations": {
           "editorUnnecessaryCode.border": "#fbbd52",
           "editorUnnecessaryCode.opacity": "#ffffff8b",
@@ -53,14 +53,27 @@
         "panicbit.cargo",
         "JScearcy.rust-doc-viewer",
         "tamasfe.even-better-toml",
-        "1YiB.rust-bundle",
+        "dustypomerleau.rust-syntax",
+        "fill-labs.dependi",
+        "rust-lang.rust-analyzer",
         "oderwat.indent-rainbow",
-        "streetsidesoftware.code-spell-checker",
         "VisualStudioExptTeam.vscodeintellicode"
       ]
     }
   },
   "features": {
-    "ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {}
-  }
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "rust",
+      "userUid": "${localEnv:USER_UID}",
+      "userGid": "${localEnv:USER_GID}",
+      "installZsh": "true",
+      "upgradePackages": "false",
+      "installOhMyZsh": "true",
+      "configureZshAsDefaultShell": "true"
+    }
+  },
+  "mounts": [
+    "type=volume,target=${workspaceFolder}/target"
+  ],
+  "postCreateCommand": ".devcontainer/post-create.sh"
 }
