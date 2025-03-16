@@ -14,11 +14,8 @@ RUN apt update \
   locales \
   man-db \
   openssh-client \
-  peco \
   rsync \
   sudo \
-  tmux \
-  vim-tiny \
   && apt-get clean autoclean \
   && apt-get autoremove --yes \
   && rm -rf /var/lib/{apt,dpkg,cache,log}/
@@ -41,21 +38,7 @@ ARG USER_GID=${USER_UID}
 
 RUN echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME}
 
-
-RUN echo /usr/bin/fish >> /etc/shells
-
-RUN groupadd --gid ${USER_GID} ${USERNAME}  \
-  && useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} -s /usr/bin/fish
-
 USER ${USERNAME}
-
-RUN mkdir -p /home/${USERNAME}/.config/fish/functions
-ADD fish_variables /home/${USERNAME}/.config/fish/fish_variables
-ADD fish_prompt.fish /home/${USERNAME}/.config/fish/functions/fish_prompt.fish
-ADD fish_search.fish /home/${USERNAME}/.config/fish/functions/fish_search.fish
-ADD fish_bind_search.fish /home/${USERNAME}/.config/fish/config.fish
-
-RUN rustup component add rustfmt
 
 WORKDIR /workspace/api
 
